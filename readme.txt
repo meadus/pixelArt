@@ -1,4 +1,6 @@
-Pixel Art Image Modifier.
+WORK IN PROGRESS
+
+Pixel Art Generator.
 
 Python 3.7 code.
 
