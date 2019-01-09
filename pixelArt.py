@@ -4,19 +4,25 @@ import numpy as np
 
 #User input file selection
 from tkinter.filedialog import askopenfilename
-filename = askopenfilename()
+from tkinter import *
+root = Tk()
+filename = askopenfilename(title = "Select Image", filetypes = (("png files","*.png"),("all files","*.*")))
 img = mpimg.imread(filename)
+root.destroy()
 
 #Preview of loaded selected image
 imgplot = plt.imshow(img)
 plt.show()
+
+#What size do you want the short edge of the pixel art?
+pixelArtShortSide = float(input("Pixel art short edge size:"))
 
 #Determining the dimensions of the pixel art
 s = img.shape
 s = np.asarray(s)
 colorDimension = np.arange(0,s[2])
 shortSide = np.amin([s[0],s[1]],axis = 0)
-scaleFactor = shortSide/20 #This value determines the number of pixels in the smallest dimension
+scaleFactor = shortSide/pixelArtShortSide
 sp = (int(round(s[0]/scaleFactor)),int(round(s[1]/scaleFactor)))
 
 #Central pixels to sample from in the original image
@@ -33,7 +39,7 @@ for i in xx:
     xx[ind] = int(round(i))
 
 #Generating empty pixel art image
-sp = (len(yy),len(xx),4)
+sp = (len(yy),len(xx),len(colorDimension))
 pix = np.zeros(sp)
 
 #Width of pixels to sample in original image
