@@ -11,8 +11,8 @@ img = mpimg.imread(filename)
 root.destroy()
 
 #Preview of loaded selected image
-imgplot = plt.imshow(img)
-plt.show()
+#imgplot = plt.imshow(img)
+#plt.show()
 
 #What size do you want the short edge of the pixel art?
 pixelArtShortSide = float(input("Pixel art short edge size:"))
@@ -55,10 +55,6 @@ while i <= len(yy)-2:
 	    for n in colorDimension: #Varies depending on image type
 	        pix[i,j,int(n)] = np.average(img[int(yy[i]-w):int(yy[i]+w),int(xx[j]-w):int(xx[j]+w),int(n)])
 
-imgplot = plt.imshow(pix)
-plt.show()
-
-
 rgb = np.arange(0,3)
 gameBoy = np.array([[15,56,15],[48,98,48],[139,172,15],[155,188,15]]) #original gameboy four colour palette
 gameBoy = gameBoy/255
@@ -79,5 +75,4 @@ while i <= len(yy)-2:
         colorCode = np.where(err == np.min(err))
         gbPix[i,j,0:3] = gameBoy[colorCode,0:] #The closest colour in the palette (minimum squared error) is assigned to the new array
 
-imgplot = plt.imshow(gbPix)
-plt.show()
+mpimg.imsave("art.png",gbPix)
