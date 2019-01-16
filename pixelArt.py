@@ -15,7 +15,8 @@ root.destroy()
 #plt.show()
 
 #What size do you want the short edge of the pixel art?
-pixelArtShortSide = float(input("Pixel art short edge size:"))
+#pixelArtShortSide = float(input("Pixel art short edge size:"))
+pixelArtShortSide = 144 #Game Boy resolution
 
 #Determining the dimensions of the pixel art
 s = img.shape
