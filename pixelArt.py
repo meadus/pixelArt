@@ -57,3 +57,27 @@ while i <= len(yy)-2:
 
 imgplot = plt.imshow(pix)
 plt.show()
+
+
+rgb = np.arange(0,3)
+gameBoy = np.array([[15,56,15],[48,98,48],[139,172,15],[155,188,15]]) #original gameboy four colour palette
+gameBoy = gameBoy/255
+colorMapDim = np.shape(gameBoy)
+gbPix = np.zeros(sp) #new images with adjusted colours
+
+i = -1
+while i <= len(yy)-2:
+    i += 1
+    j = -1
+    while j <= len(xx)-2:
+        j += 1
+        err = np.zeros(colorMapDim)
+        for k in rgb:
+            err[0:,k] = gameBoy[0:,k] - pix[i,j,k]
+        err = np.power(err,2)
+        err = np.sum(err, axis = 1) #Results in a squared error for each pixel vs. the colour palette
+        colorCode = np.where(err == np.min(err))
+        gbPix[i,j,0:3] = gameBoy[colorCode,0:] #The closest colour in the palette (minimum squared error) is assigned to the new array
+
+imgplot = plt.imshow(gbPix)
+plt.show()
